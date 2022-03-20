@@ -1,12 +1,38 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Component, useMemo } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isLoggedInState } from "./../../../recoil/Global";
 import { View, FlatList, Text, Button } from "react-native";
 import api from "./../../../config/Api";
+import Slider, { Settings } from "react-slick";
+// slider 기능을 구현하기 위해 추가
+import 'slick-carousel/slick/slick/css';
+import 'slick-carousel/slick/slick-theme.css';
+
+
+
+//import imgA from "./../../../assets/cafe.jpg";
+
 // import SimpleImageSlider from "react-simple-image-slider/dist/ImageSlider";
 
-const Container = styled.View`
+// export default class Simpleslider extends Component {
+//   render() {
+//     const settings = {
+//       dots: true,
+//       infinite: ture,
+//       speed: 500,
+//       slidesToShow: 1,
+//       slidesToScroll: 1
+//     };
+
+ const SlideWrapper = styled.section`
+   position: relative;
+   `;
+
+
+
+
+   const Container1 = styled.View`
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -23,6 +49,8 @@ const ContainterHead = styled.Text`
   padding: 5%;
   font-size: 40px;
 `;
+
+
 
 const FlexDemo = () => {
   return (
@@ -89,12 +117,36 @@ const App = () => {
   // statusBar.setBarstyle("dark-content");
   
   return (
-    <Container>
+    <Container1>
       <ContainterHead>김재환님</ContainterHead>
       <ContainerText>오늘 일정은 어떠셨나요</ContainerText>
       <FlexDemo></FlexDemo>
-    </Container>
+      <img
+      src={imgA}
+      width='12'
+      height='12'
+      ></img>
+    </Container1>
   );
 };
+
+//     return (
+//       <div>
+//         <h2> Single Item</h2>
+//         <Slider {...settings}>
+//           <div>
+//             <h3>1</h3>
+//           </div>
+//           <div>
+//             <h3>2</h3>
+//           </div>
+//           <div>
+//             <h3>3</h3>
+//           </div>
+//         </Slider>
+//       </div>
+//     );
+//   }
+// }
 
 export default Main;

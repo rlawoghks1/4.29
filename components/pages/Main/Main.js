@@ -1,72 +1,97 @@
-import React, { useState, useRef, useEffect, Component, useMemo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isLoggedInState } from "./../../../recoil/Global";
-import { View, FlatList, Text, Button } from "react-native";
+import { View, FlatList, Text, Button, StyleSheet,Image, SafeAreaView, TextInput } from "react-native";
 import api from "./../../../config/Api";
-import Slider, { Settings } from "react-slick";
-// slider 기능을 구현하기 위해 추가
-import 'slick-carousel/slick/slick/css';
-import 'slick-carousel/slick/slick-theme.css';
+import { EvilIcons } from '@expo/vector-icons';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
 
-
-
-//import imgA from "./../../../assets/cafe.jpg";
-
-// import SimpleImageSlider from "react-simple-image-slider/dist/ImageSlider";
-
-// export default class Simpleslider extends Component {
-//   render() {
-//     const settings = {
-//       dots: true,
-//       infinite: ture,
-//       speed: 500,
-//       slidesToShow: 1,
-//       slidesToScroll: 1
-//     };
-
- const SlideWrapper = styled.section`
-   position: relative;
-   `;
-
-
-
-
-   const Container1 = styled.View`
+const Container = styled.View`
   width: 100%;
   height: 100%;
   flex-direction: column;
+  alignItems: center;
+`;
+
+const HeadLine = styled(Container)`
+  width: 100%;
+  height: 20%;
+  flex-direction: row;
   margin: 5% 0;
+  alignItems: center;
 `;
 
-const ContainerText = styled.Text`
-  font-size: 18px;
+const SeachText = styled.Text`
+  font-size: 12px;
   color: gray;
-  padding: 5%;
 `;
 
-const ContainterHead = styled.Text`
-  padding: 5%;
-  font-size: 40px;
+const CenterRowText = styled.Text`
+  font-size: 12px;
+  color: black;
+  margin: 3px 40px 3px 40px;
 `;
 
+const Box = styled.View`
+  margin: 10% 10% 10% 10%;
+  flex-direction: row;
+  padding: 20px;
+  background-color: #e5e5e5;
+  border-radius: 20px;
+`;
+
+const SliderButton = styled.View`
+  width: 100%;
+  height: 10%;
+  flex-direction: row;
+  alignItems: center;
+  `
+
+const Tab = createBottomTabNavigator();
+
+// const TextBoxSample = () => {
+//   const [text, onChnageText] =Teact.useState("Useless Text")
+//   const [number, onChangeNumber] = React.useState(null);
+
+//   return (
+//     <SafeAreaView>
+//       <TextInput
+//         style={styles.input}
+//         onChangeText={onChangeText}
+//         value={text}
+//       />
+//       <TextInput
+//         style={styles.input}
+//         onChangeText={onChangeNumber}
+//         value={number}
+//         placeholder="useless placeholder"
+//         keyboardType="numeric"
+//       />
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   input: {
+//     height: 40,
+//     margin: 12,
+//     borderWidth: 1,
+//     padding: 10,
+//   },
+// });
 
 
-const FlexDemo = () => {
-  return (
-    <View style={{ marginTop: 30, height: '3%'}}>
-      <View style={{ flex: 1, backgroundColor: '#c4c4c4'}} />
-    </View>
 
-  )
-}
-
-// const ImageBackground = Styled.ImageBackground`
-//     flex: 1;
-//     height: 100%;
-//     weight: 100%;
-//     opacity: 0.8;
-// `;
+const Inputbox = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
 
 const Main = ({ navigation, route }) => {
   const [loginState, setLoginState] = useRecoilState(isLoggedInState);
@@ -87,66 +112,26 @@ const Main = ({ navigation, route }) => {
     }
   }
 
-const App = () => {
+  const BackImageView = styled.ImageBackground`
+  width: 299px;
+  height: 200px;
+  flex-direction: column;
+`;
+
   return (
-    <div>
-      <SimpleImageSlider
-        width={896}
-        height={504}
-        images={images}
-        showBullets={true}
-        shoWNavs={ture}
-        />
-    </div>
-  );
-}
+    <Container>
+      <HeadLine>
+      <Box>
+        <CenterRowText allowFontScaling={false}>언제든·게스트 추가</CenterRowText>
+      </Box>
+      <EvilIcons name="gear" size={24} color="black"/>
+      </HeadLine>
+      <SliderButton></SliderButton>
+      <BackImageView source={require("./../../../assets/medienglogo.png")} />
+    </Container>
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const renderItem = ({ item }) => (
-    <View>
-      <Text>{item.name}</Text>
-    </View>
-  );
-
-
-  // statusBar.setBackgroundColor("transparent");
-  // statusBar.setTranslucent(true);
-  // statusBar.setBarstyle("dark-content");
-  
-  return (
-    <Container1>
-      <ContainterHead>김재환님</ContainterHead>
-      <ContainerText>오늘 일정은 어떠셨나요</ContainerText>
-      <FlexDemo></FlexDemo>
-      <img
-      src={imgA}
-      width='12'
-      height='12'
-      ></img>
-    </Container1>
   );
 };
 
-//     return (
-//       <div>
-//         <h2> Single Item</h2>
-//         <Slider {...settings}>
-//           <div>
-//             <h3>1</h3>
-//           </div>
-//           <div>
-//             <h3>2</h3>
-//           </div>
-//           <div>
-//             <h3>3</h3>
-//           </div>
-//         </Slider>
-//       </div>
-//     );
-//   }
-// }
 
 export default Main;
